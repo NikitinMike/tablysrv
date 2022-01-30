@@ -13,9 +13,8 @@ export class AppService {
     { id: 1, name: 'Яблоки', price: '$2' },
     { id: 2, name: 'Персики', price: '$5' },
   ];
+
   getHello() {
-    // return 'Hello World!';
-    // return [this.row, this.row, this.row];
     return { items: this.items };
   }
 }
