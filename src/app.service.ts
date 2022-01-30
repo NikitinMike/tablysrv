@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   row = [
-    '1',
+    1,
     'jsdidhx',
     'ghdhdhd',
     'jfjfdjdfdsl',
