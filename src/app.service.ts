@@ -14,7 +14,15 @@ export class AppService {
     { id: 2, name: 'Персики', price: '$5' },
   ];
 
+  rows = [
+    ['', 'jsdidhx', 'ghdhdhd', 'jfjfdjdfdsl', 356778, 'jdiow euhu wsuh', 'hdjfjikshf',],
+    ['', 'uijflsdjh', 'ffffvc', 'ehjjkjf', 6899, 'fiky ukioogy gh', 'gustukhhg',],
+    ['', 'idjskf', 'vbccfff', 'dhjgfd', 57890, 'fhjjffg gjhh', 'fhiuturdgu'],
+    ['', 'ldfjddik', 'cgggh', 'dhjkssdffg', 35789, 'uuesfibuy ufff', 'gikofgh'],
+  ];
+
   getHello() {
-    return { items: this.items };
+    // return { items: this.items };
+    return { rows: this.rows };
   }
 }
