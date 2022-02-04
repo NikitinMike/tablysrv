@@ -20,7 +20,7 @@ export class ContactsController {
     return this.contactsService.findAll();
   }
 
-  @Post('')
+  @Post()
   async create(@Body() contactData: Contact): Promise<any> {
     return this.contactsService.create(contactData);
   }
@@ -41,7 +41,7 @@ export class ContactsController {
 
   @Get(':id')
   @ApiParam({ name: 'id' })
-  async get(@Param('id') id): Promise<any> {
+  async getOne(@Param('id') id): Promise<any> {
     return this.contactsService.get(id);
   }
 }
