@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './contact.entity';
+import { ApiParam } from '@nestjs/swagger';
 
 @Controller('contacts')
 export class ContactsController {
@@ -25,6 +26,7 @@ export class ContactsController {
   }
 
   @Put(':id/update')
+  @ApiParam({ name: 'id' })
   async update(@Param('id') id, @Body() contactData: Contact): Promise<any> {
     contactData.id = Number(id);
     console.log('Update #' + contactData.id);
@@ -32,6 +34,7 @@ export class ContactsController {
   }
 
   @Delete(':id/delete')
+  @ApiParam({ name: 'id' })
   async delete(@Param('id') id): Promise<any> {
     return this.contactsService.delete(id);
   }
