@@ -20,12 +20,12 @@ export class ContactsController {
     return this.contactsService.findAll();
   }
 
-  @Post('create')
+  @Post('')
   async create(@Body() contactData: Contact): Promise<any> {
     return this.contactsService.create(contactData);
   }
 
-  @Put(':id/update')
+  @Put(':id')
   @ApiParam({ name: 'id' })
   async update(@Param('id') id, @Body() contactData: Contact): Promise<any> {
     contactData.id = Number(id);
@@ -33,9 +33,15 @@ export class ContactsController {
     return this.contactsService.update(contactData);
   }
 
-  @Delete(':id/delete')
+  @Delete(':id')
   @ApiParam({ name: 'id' })
   async delete(@Param('id') id): Promise<any> {
     return this.contactsService.delete(id);
+  }
+
+  @Get(':id')
+  @ApiParam({ name: 'id' })
+  async get(@Param('id') id): Promise<any> {
+    return this.contactsService.get(id);
   }
 }

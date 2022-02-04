@@ -25,4 +25,8 @@ export class ContactsService {
   async delete(id): Promise<DeleteResult> {
     return await this.contactRepository.delete(id);
   }
+
+  async get(id): Promise<Contact> {
+    return await this.contactRepository.findOneOrFail(id);
+  }
 }
