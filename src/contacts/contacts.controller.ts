@@ -22,6 +22,8 @@ export class ContactsController {
 
   @Post()
   async create(@Body() contactData: Contact): Promise<any> {
+    if (contactData != null) contactData.id = null;
+    else contactData = new Contact();
     return this.contactsService.create(contactData);
   }
 

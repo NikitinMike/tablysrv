@@ -1,33 +1,33 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
-export class Contact {
+export class Contact extends BaseEntity {
   @ApiProperty({})
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   firstName: string;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   city: string;
 
   @ApiProperty({})
-  @Column()
+  @Column({ nullable: true })
   country: string;
 }
