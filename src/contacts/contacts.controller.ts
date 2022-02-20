@@ -30,7 +30,7 @@ export class ContactsController {
   @Put(':id')
   @ApiParam({ name: 'id' })
   async update(@Param('id') id, @Body() contactData: Contact): Promise<any> {
-    console.log(id);
+    // console.log(id);
     contactData.id = Number(id);
     console.log('Update #' + contactData.id);
     return this.contactsService.update(id, contactData);

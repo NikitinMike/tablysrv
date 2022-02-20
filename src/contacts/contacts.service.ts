@@ -19,7 +19,7 @@ export class ContactsService {
   }
 
   async update(id, contact: Contact): Promise<UpdateResult> {
-    console.log(contact);
+    // console.log(contact);
     return await this.contactRepository.update(id, contact);
   }
 
