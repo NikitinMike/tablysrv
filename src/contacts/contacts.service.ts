@@ -18,8 +18,9 @@ export class ContactsService {
     return await this.contactRepository.save(contact);
   }
 
-  async update(contact: Contact): Promise<UpdateResult> {
-    return await this.contactRepository.update(contact.id, contact);
+  async update(id, contact: Contact): Promise<UpdateResult> {
+    console.log(contact);
+    return await this.contactRepository.update(id, contact);
   }
 
   async delete(id): Promise<DeleteResult> {

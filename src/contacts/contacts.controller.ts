@@ -33,8 +33,7 @@ export class ContactsController {
     console.log(id);
     contactData.id = Number(id);
     console.log('Update #' + contactData.id);
-    console.log(contactData);
-    return this.contactsService.update(contactData);
+    return this.contactsService.update(id, contactData);
   }
 
   @Delete(':id')
