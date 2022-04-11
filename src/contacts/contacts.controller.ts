@@ -17,7 +17,13 @@ export class ContactsController {
 
   @Get()
   index(): Promise<Contact[]> {
-    return this.contactsService.getPage();
+    return this.contactsService.findAll();
+  }
+
+  @Get('page:page')
+  @ApiParam({ name: 'page' })
+  page(@Param('page') page): Promise<Contact[]> {
+    return this.contactsService.getPage(page);
   }
 
   @Post()

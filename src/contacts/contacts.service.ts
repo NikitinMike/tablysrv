@@ -10,17 +10,19 @@ export class ContactsService {
     private contactRepository: Repository<Contact>,
   ) {}
 
-  async getPage(): Promise<Contact[]> {
+  pageSize = 10;
+
+  async getPage(page: number): Promise<Contact[]> {
     return await this.contactRepository.find({
-      skip: 0,
-      take: 10,
+      skip: this.pageSize * page,
+      take: this.pageSize,
       order: { id: 'ASC' },
     });
   }
 
-  // async findAll(): Promise<Contact[]> {
-  //   return await this.contactRepository.find();
-  // }
+  async findAll(): Promise<Contact[]> {
+    return await this.contactRepository.find();
+  }
 
   /*
   async findAll(query): Promise<Paginate> {
