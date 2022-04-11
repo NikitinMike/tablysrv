@@ -17,7 +17,7 @@ export class ContactsController {
 
   @Get()
   index(): Promise<Contact[]> {
-    return this.contactsService.findAll();
+    return this.contactsService.getPage();
   }
 
   @Post()
