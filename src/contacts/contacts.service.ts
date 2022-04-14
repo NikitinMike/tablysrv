@@ -2,13 +2,11 @@ import { Injectable } from '@nestjs/common';
 import {
   DeleteResult,
   FindManyOptions,
-  Like,
   Repository,
   UpdateResult,
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Contact } from './contact.entity';
-import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 
 @Injectable()
 export class ContactsService {
@@ -18,18 +16,18 @@ export class ContactsService {
   ) {}
 
   pageSize = 10;
+  dir = true;
 
   getOrder(orderBy: string) {
     const findOptions: FindManyOptions<Contact> = {};
     return orderBy
-      ? (findOptions.order = { [orderBy]: 'ASC' })
-      : (findOptions.order = { id: 'ASC' });
+      ? (findOptions.order = { [orderBy]: this.dir ? 1 : -1 })
+      : (findOptions.order = { id: this.dir ? 1 : -1 });
   }
 
   // const findOptions: FindManyOptions<Contact> = { where: findWhere, };
 
   async getPageOrder(page: number, orderBy: string) {
-    console.log(orderBy);
     return await this.contactRepository.find({
       skip: this.pageSize * page,
       take: this.pageSize,
@@ -50,24 +48,24 @@ export class ContactsService {
   }
 
   /*
-  async findAll(query): Promise<Paginate> {
-    const take = query.take || 10;
-    const skip = query.skip || 0;
-    const keyword = query.keyword || '';
-
-    const [result, total] = await this.contactRepository.findAndCount({
-      where: { name: Like('%' + keyword + '%') },
-      order: { name: 'DESC' },
-      take: take,
-      skip: skip,
-    });
-
-    return {
-      data: result,
-      count: total,
-    };
-  }
-  */
+      async findAll(query): Promise<Paginate> {
+        const take = query.take || 10;
+        const skip = query.skip || 0;
+        const keyword = query.keyword || '';
+    
+        const [result, total] = await this.contactRepository.findAndCount({
+          where: { name: Like('%' + keyword + '%') },
+          order: { name: 'DESC' },
+          take: take,
+          skip: skip,
+        });
+    
+        return {
+          data: result,
+          count: total,
+        };
+      }
+      */
 
   async create(contact: Contact): Promise<Contact> {
     return await this.contactRepository.save(contact);
