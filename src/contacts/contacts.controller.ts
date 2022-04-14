@@ -20,6 +20,13 @@ export class ContactsController {
     return this.contactsService.findAll();
   }
 
+  @Get(':order/page:page')
+  @ApiParam({ name: 'page' })
+  @ApiParam({ name: 'order' })
+  pageOrder(@Param('page') page, @Param('order') order): Promise<Contact[]> {
+    return this.contactsService.getPageOrder(page, order);
+  }
+
   @Get('page:page')
   @ApiParam({ name: 'page' })
   page(@Param('page') page): Promise<Contact[]> {

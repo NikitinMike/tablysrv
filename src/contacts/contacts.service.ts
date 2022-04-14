@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { DeleteResult, Like, Repository, UpdateResult } from 'typeorm';
+import {
+  DeleteResult,
+  FindManyOptions,
+  Like,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Contact } from './contact.entity';
+import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 
 @Injectable()
 export class ContactsService {
@@ -12,11 +19,53 @@ export class ContactsService {
 
   pageSize = 10;
 
+  getOrder(orderBy: string) {
+    const findOptions: FindManyOptions<Contact> = {};
+    switch (orderBy) {
+      case 'firstName':
+        return (findOptions.order = { firstName: 'ASC' });
+      case 'lastName':
+        return (findOptions.order = { lastName: 'ASC' });
+      case 'email':
+        return (findOptions.order = { email: 'ASC' });
+      case 'phone':
+        return (findOptions.order = { phone: 'ASC' });
+      case 'city':
+        return (findOptions.order = { city: 'ASC' });
+      case 'country':
+        return (findOptions.order = { country: 'ASC' });
+      default:
+        return (findOptions.order = { id: 'ASC' });
+    }
+  }
+
+  /*
+  const findOptions: FindManyOptions<Contact> = {
+    // skip: filter.offset,
+    // take: filter.limit,
+    order: { orderBy: 1 },
+    // where: findWhere,
+  };
+  */
+
+  // const order = {};
+  // Object.defineProperty(order, orderBy, 1);
+  // console.log(order);
+
+  async getPageOrder(page: number, orderBy: string) {
+    console.log(orderBy);
+    return await this.contactRepository.find({
+      skip: this.pageSize * page,
+      take: this.pageSize,
+      order: this.getOrder(orderBy),
+    });
+  }
+
   async getPage(page: number): Promise<Contact[]> {
     return await this.contactRepository.find({
       skip: this.pageSize * page,
       take: this.pageSize,
-      order: { id: 'ASC' },
+      order: { id: 1 },
     });
   }
 
