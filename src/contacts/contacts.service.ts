@@ -21,36 +21,12 @@ export class ContactsService {
 
   getOrder(orderBy: string) {
     const findOptions: FindManyOptions<Contact> = {};
-    switch (orderBy) {
-      case 'firstName':
-        return (findOptions.order = { firstName: 'ASC' });
-      case 'lastName':
-        return (findOptions.order = { lastName: 'ASC' });
-      case 'email':
-        return (findOptions.order = { email: 'ASC' });
-      case 'phone':
-        return (findOptions.order = { phone: 'ASC' });
-      case 'city':
-        return (findOptions.order = { city: 'ASC' });
-      case 'country':
-        return (findOptions.order = { country: 'ASC' });
-      default:
-        return (findOptions.order = { id: 'ASC' });
-    }
+    return orderBy
+      ? (findOptions.order = { [orderBy]: 'ASC' })
+      : (findOptions.order = { id: 'ASC' });
   }
 
-  /*
-  const findOptions: FindManyOptions<Contact> = {
-    // skip: filter.offset,
-    // take: filter.limit,
-    order: { orderBy: 1 },
-    // where: findWhere,
-  };
-  */
-
-  // const order = {};
-  // Object.defineProperty(order, orderBy, 1);
-  // console.log(order);
+  // const findOptions: FindManyOptions<Contact> = { where: findWhere, };
 
   async getPageOrder(page: number, orderBy: string) {
     console.log(orderBy);
