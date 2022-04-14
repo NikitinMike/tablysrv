@@ -20,6 +20,7 @@ export class ContactsService {
 
   getOrder(orderBy: string) {
     const findOptions: FindManyOptions<Contact> = {};
+    // console.log(this.dir);
     return orderBy
       ? (findOptions.order = { [orderBy]: this.dir ? 1 : -1 })
       : (findOptions.order = { id: this.dir ? 1 : -1 });
@@ -27,7 +28,9 @@ export class ContactsService {
 
   // const findOptions: FindManyOptions<Contact> = { where: findWhere, };
 
-  async getPageOrder(page: number, orderBy: string) {
+  async getPageOrder(page: number, orderBy: string, direction) {
+    if (direction) this.dir = direction == '1';
+    // console.log(this.dir, direction);
     return await this.contactRepository.find({
       skip: this.pageSize * page,
       take: this.pageSize,

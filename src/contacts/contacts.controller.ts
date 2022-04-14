@@ -5,11 +5,12 @@ import {
   Get,
   Param,
   Post,
-  Put, Query,
+  Put,
+  Query,
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './contact.entity';
-import {ApiParam, ApiQuery} from '@nestjs/swagger';
+import { ApiParam, ApiQuery } from '@nestjs/swagger';
 
 @Controller('contacts')
 export class ContactsController {
@@ -29,8 +30,7 @@ export class ContactsController {
     @Param('page') page,
     @Param('order') order,
   ): Promise<Contact[]> {
-    console.log(direction);
-    return this.contactsService.getPageOrder(page, order);
+    return this.contactsService.getPageOrder(page, order, direction);
   }
 
   @Get('page:page')
