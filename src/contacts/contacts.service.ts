@@ -51,24 +51,24 @@ export class ContactsService {
   }
 
   /*
-      async findAll(query): Promise<Paginate> {
-        const take = query.take || 10;
-        const skip = query.skip || 0;
-        const keyword = query.keyword || '';
-    
-        const [result, total] = await this.contactRepository.findAndCount({
-          where: { name: Like('%' + keyword + '%') },
-          order: { name: 'DESC' },
-          take: take,
-          skip: skip,
-        });
-    
-        return {
-          data: result,
-          count: total,
-        };
-      }
-      */
+        async findAll(query): Promise<Paginate> {
+          const take = query.take || 10;
+          const skip = query.skip || 0;
+          const keyword = query.keyword || '';
+      
+          const [result, total] = await this.contactRepository.findAndCount({
+            where: { name: Like('%' + keyword + '%') },
+            order: { name: 'DESC' },
+            take: take,
+            skip: skip,
+          });
+      
+          return {
+            data: result,
+            count: total,
+          };
+        }
+        */
 
   async create(contact: Contact): Promise<Contact> {
     return await this.contactRepository.save(contact);
