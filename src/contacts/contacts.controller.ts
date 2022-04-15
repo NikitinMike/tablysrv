@@ -22,11 +22,11 @@ export class ContactsController {
   }
 
   @Get(':order/page:page')
-  @ApiQuery({ name: 'dir' })
+  @ApiQuery({ name: 'dir', required: false })
   @ApiParam({ name: 'page' })
   @ApiParam({ name: 'order' })
   pageOrder(
-    @Query('dir') direction,
+    @Query('dir') direction: string,
     @Param('page') page,
     @Param('order') order,
   ): Promise<Contact[]> {
