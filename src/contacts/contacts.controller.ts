@@ -23,14 +23,16 @@ export class ContactsController {
 
   @Get(':order/page:page')
   @ApiQuery({ name: 'dir', required: false })
+  @ApiQuery({ name: 'size', required: false })
   @ApiParam({ name: 'page' })
   @ApiParam({ name: 'order' })
   pageOrder(
     @Query('dir') direction: string,
+    @Query('size') size: number,
     @Param('page') page,
     @Param('order') order,
   ): Promise<Contact[]> {
-    return this.contactsService.getPageOrder(page, order, direction);
+    return this.contactsService.getPageOrder(page, order, direction, size);
   }
 
   @Get('page:page')

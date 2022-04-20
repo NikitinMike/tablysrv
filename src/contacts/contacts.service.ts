@@ -28,7 +28,8 @@ export class ContactsService {
 
   // const findOptions: FindManyOptions<Contact> = { where: findWhere, };
 
-  async getPageOrder(page: number, orderBy: string, direction) {
+  async getPageOrder(page: number, orderBy: string, direction, size: number) {
+    if (size) this.pageSize = size;
     if (direction) this.dir = direction == '1';
     // console.log(this.dir, direction);
     return await this.contactRepository.find({
