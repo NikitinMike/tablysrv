@@ -17,8 +17,17 @@ export class ContactsController {
   constructor(private contactsService: ContactsService) {}
 
   @Get()
-  index(): Promise<Contact[]> {
-    return this.contactsService.findAll();
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'size', required: false })
+  @ApiQuery({ name: 'order', required: false })
+  @ApiQuery({ name: 'dir', required: false })
+  index(
+    @Query('page') page: number,
+    @Query('size') size: number,
+    @Query('order') order: string,
+    @Query('dir') dir: string,
+  ): Promise<Contact[]> {
+    return this.contactsService.findAll(page, size, order, dir);
   }
 
   @Get(':order/page:page')

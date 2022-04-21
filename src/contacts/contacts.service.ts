@@ -47,8 +47,21 @@ export class ContactsService {
     });
   }
 
-  async findAll(): Promise<Contact[]> {
-    return await this.contactRepository.find();
+  async findAll(
+    page: number,
+    size: number,
+    order: string,
+    dir: string,
+  ): Promise<Contact[]> {
+    // console.log(page, size, order, dir);
+    if (!page) page = 0;
+    if (size) this.pageSize = size;
+    if (dir) this.dir = dir == '1';
+    return await this.contactRepository.find({
+      skip: this.pageSize * page,
+      take: this.pageSize,
+      order: this.getOrder(order),
+    });
   }
 
   /*
