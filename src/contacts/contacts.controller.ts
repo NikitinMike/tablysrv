@@ -7,15 +7,18 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './contact.entity';
 import { ApiParam, ApiQuery } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('contacts')
 export class ContactsController {
   constructor(private contactsService: ContactsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ApiQuery({ name: 'page', required: false })
   @ApiQuery({ name: 'size', required: false })
