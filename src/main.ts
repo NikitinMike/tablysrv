@@ -8,9 +8,11 @@ import * as http from 'http';
 import * as express from 'express';
 
 async function bootstrap() {
+  // https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8
+  // https://sourceforge.net/projects/openssl-for-windows/
   const httpsOptions = {
     key: fs.readFileSync('C:\\OpenSSL\\SSL\\localhost.key', 'utf8'),
-    cert: fs.readFileSync('C:\\OpenSSL\\SSL\\localhost.csr', 'utf8'),
+    cert: fs.readFileSync('C:\\OpenSSL\\SSL\\localhost.crt', 'utf8'),
   };
 
   const server = express();
@@ -48,7 +50,7 @@ async function bootstrap() {
   await app.init();
 
   http.createServer(server).listen(3000);
-  // https.createServer(httpsOptions, server).listen(443);
+  https.createServer(httpsOptions, server).listen(443);
 }
 
 bootstrap().then((r) => console.log(r));
