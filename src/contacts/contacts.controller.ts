@@ -53,6 +53,7 @@ export class ContactsController {
     return this.contactsService.getPage(page);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() contactData: Contact): Promise<any> {
     if (contactData != null) contactData.id = null;
@@ -60,6 +61,7 @@ export class ContactsController {
     return this.contactsService.create(contactData);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Put(':id')
   @ApiParam({ name: 'id' })
   async update(@Param('id') id, @Body() contactData: Contact): Promise<any> {
@@ -69,12 +71,14 @@ export class ContactsController {
     return this.contactsService.update(id, contactData);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @ApiParam({ name: 'id' })
   async delete(@Param('id') id): Promise<any> {
     return this.contactsService.delete(id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   @ApiParam({ name: 'id' })
   async getOne(@Param('id') id): Promise<any> {
