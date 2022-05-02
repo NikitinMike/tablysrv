@@ -1,9 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as fs from 'fs';
+import * as https from 'https';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as http from 'http';
+import * as express from 'express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const httpsOptions = {
+    key: fs.readFileSync('C:\\OpenSSL\\SSL\\localhost.key', 'utf8'),
+    cert: fs.readFileSync('C:\\OpenSSL\\SSL\\localhost.csr', 'utf8'),
+  };
+
+  const server = express();
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
 
   const config = new DocumentBuilder()
     .setTitle('Cats example')
@@ -34,7 +45,10 @@ async function bootstrap() {
     maxAge: 60 * 60 * 24 * 365,
     preflightContinue: false,
   });
-  await app.listen(3000);
+  await app.init();
+
+  http.createServer(server).listen(3000);
+  // https.createServer(httpsOptions, server).listen(443);
 }
 
 bootstrap().then((r) => console.log(r));
