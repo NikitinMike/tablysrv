@@ -18,7 +18,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class ContactsController {
   constructor(private contactsService: ContactsService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   @ApiQuery({ name: 'page', required: false })
   @ApiQuery({ name: 'size', required: false })
