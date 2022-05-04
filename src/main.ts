@@ -46,8 +46,8 @@ async function bootstrap() {
   // https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8
   // https://sourceforge.net/projects/openssl-for-windows/
   const httpsOptions = {
-    key: fs.readFileSync(__dirname + '\\..\\..\\SSL\\localhost.key', 'utf8'),
-    cert: fs.readFileSync(__dirname + '\\..\\..\\SSL\\localhost.crt', 'utf8'),
+    key: fs.readFileSync('C:\\SSL\\localhost.key', 'utf8'),
+    cert: fs.readFileSync('C:\\SSL\\localhost.crt', 'utf8'),
   };
   https.createServer(httpsOptions, server).listen(443);
 }
